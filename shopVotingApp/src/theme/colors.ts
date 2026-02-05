@@ -1,0 +1,17 @@
+export const colors = {
+    primary: '#0a7ea4',
+    secondary: '#ff6b6b',
+    background: '#ffffff',
+    text: '#11181c',
+    textSecondary: '#687076',
+    surface: '#f9f9f9',
+    border: '#e0e0e0',
+    error: '#d32f2f',
+    success: '#2e7d32',
+    white: '#ffffff',
+    black: '#000000',
+    transparent: 'transparent',
+    tint: '#2f95dc',
+    tabIconDefault: '#ccc',
+    tabIconSelected: '#2f95dc',
+};
