@@ -1,4 +1,4 @@
-import { Redirect } from 'expo-router';
+  import { Redirect } from 'expo-router';
 import { View, Text, ActivityIndicator } from 'react-native';
 import { useAuth } from '@/src/context/auth/AuthContext';
 import { useEffect, useState } from 'react';
@@ -18,7 +18,6 @@ export default function Index() {
         return <Redirect href="/(tabs)/home" />;
     }
 
-    // For now, redirect to login or tabs directly for demo
-    // return <Redirect href="/(auth)/login" />;
-    return <Redirect href="/(tabs)/home" />;
+    
+    return <Redirect href="/(auth)/login" />;
 }

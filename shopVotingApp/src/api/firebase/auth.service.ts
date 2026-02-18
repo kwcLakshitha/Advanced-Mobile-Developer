@@ -1,20 +1,33 @@
-// import { auth } from './firebase.config';
-// import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import {
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    signOut,
+    User as FirebaseUser
+} from 'firebase/auth';
+import { auth } from '@/src/config/firebase';
+import { User } from '@/src/models/User';
+
+const mapFirebaseUser = (firebaseUser: FirebaseUser): User => {
+    return {
+        id: firebaseUser.uid,
+        email: firebaseUser.email || '',
+        name: firebaseUser.displayName || undefined,
+        avatarUrl: firebaseUser.photoURL || undefined,
+    };
+};
 
 export const authService = {
-    login: async (email: string, password: string) => {
-        // return signInWithEmailAndPassword(auth, email, password);
-        console.log('Login', email);
-        return Promise.resolve({ user: { id: '1', email } });
+    login: async (email: string, password: string): Promise<{ user: User }> => {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        return { user: mapFirebaseUser(userCredential.user) };
     },
-    register: async (email: string, password: string) => {
-        // return createUserWithEmailAndPassword(auth, email, password);
-        console.log('Register', email);
-        return Promise.resolve({ user: { id: '1', email } });
+
+    register: async (email: string, password: string): Promise<{ user: User }> => {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        return { user: mapFirebaseUser(userCredential.user) };
     },
-    logout: async () => {
-        // return signOut(auth);
-        console.log('Logout');
-        return Promise.resolve();
+
+    logout: async (): Promise<void> => {
+        await signOut(auth);
     }
 };
